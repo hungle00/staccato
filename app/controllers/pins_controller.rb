@@ -67,12 +67,12 @@ class PinsController < InertiaController
 
     # Only allow a list of trusted parameters through.
     def pin_params
-      params.require(:pin).permit(:name, :description, :published)
+      params.require(:pin).permit(:name, :description, :location, :published)
     end
 
     def serialize_pin(pin)
       pin.as_json(only: [
-        :id, :name, :description, :published
+        :id, :name, :location, :description, :published
       ])
     end
 end
