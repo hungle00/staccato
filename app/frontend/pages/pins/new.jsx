@@ -7,7 +7,7 @@ export default function New({ pin }) {
       <Head title="New pin" />
 
       <div className="mx-auto md:w-2/3 w-full px-8 pt-8">
-        <h1 className="font-bold text-4xl">New pin</h1>
+        <h1 className="font-bold text-4xl">Add your pin</h1>
 
         <Form
           pin={pin}

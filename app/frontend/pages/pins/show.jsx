@@ -3,6 +3,7 @@ import Pin from './pin'
 
 export default function Show({ pin }) {
   const { flash } = usePage()
+  console.log(pin)
 
   return (
     <>
@@ -15,8 +16,6 @@ export default function Show({ pin }) {
               {flash.notice}
             </p>
           )}
-
-          <h1 className="font-bold text-4xl">Pin #{pin.id}</h1>
 
           <Pin pin={pin} />
 

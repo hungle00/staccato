@@ -6,7 +6,9 @@ export default function Form({ pin, submitText, ...formProps }) {
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showResults, setShowResults] = useState(false);
+  const [imagePreview, setImagePreview] = useState(null);
   const wrapperRef = useRef(null);
+  const fileInputRef = useRef(null);
 
   // Close dropdown on outside click
   useEffect(() => {
@@ -69,6 +71,26 @@ export default function Form({ pin, submitText, ...formProps }) {
   function selectLocation(feature) {
     setQuery(feature.place_name);
     setShowResults(false);
+  }
+
+  // Handle image selection
+  function handleImageChange(e) {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  // Clear image
+  function clearImage() {
+    setImagePreview(null);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
   }
 
   return (
@@ -171,6 +193,44 @@ export default function Form({ pin, submitText, ...formProps }) {
             {errors.description && (
               <div className="text-red-500 px-3 py-2 font-medium">
                 {errors.description.join(', ')}
+              </div>
+            )}
+          </div>
+
+          <div className="my-5">
+            <label htmlFor="image">Image</label>
+            <input
+              type="file"
+              name="image"
+              id="image"
+              ref={fileInputRef}
+              onChange={handleImageChange}
+              accept="image/*"
+              className="block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full"
+            />
+            {errors.image && (
+              <div className="text-red-500 px-3 py-2 font-medium">
+                {errors.image.join(', ')}
+              </div>
+            )}
+            
+            {/* Image Preview */}
+            {imagePreview && (
+              <div className="mt-4">
+                <div className="relative inline-block">
+                  <img
+                    src={imagePreview}
+                    alt="Preview"
+                    className="max-w-xs rounded-md border border-gray-300"
+                  />
+                  <button
+                    type="button"
+                    onClick={clearImage}
+                    className="absolute top-2 right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600"
+                  >
+                    ✕
+                  </button>
+                </div>
               </div>
             )}
           </div>

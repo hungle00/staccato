@@ -1,5 +1,6 @@
 class Pin < ApplicationRecord
   geocoded_by :location
+  has_one_attached :image
 
   validates :name, presence: true
   validates :location, presence: true

@@ -14,7 +14,7 @@ class PinsController < InertiaController
   # GET /pins/1
   def show
     render inertia: {
-      pin: serialize_pin(@pin)
+      pin: serialize_pin(@pin).merge(image_url: pin_image_url(@pin))
     }
   end
 
@@ -67,12 +67,20 @@ class PinsController < InertiaController
 
     # Only allow a list of trusted parameters through.
     def pin_params
-      params.require(:pin).permit(:name, :description, :location, :published)
+      params.require(:pin).permit(:name, :description, :location, :published, :image)
     end
 
     def serialize_pin(pin)
       pin.as_json(only: [
-        :id, :name, :location, :description, :published, :latitude, :longitude
+        :id, :name, :location, :description, :published, :latitude, :longitude, :image_url
       ])
+    end
+
+    def pin_image_url(pin)
+      if pin.image.attached?
+        url_for(pin.image)
+      else
+        nil
+      end
     end
 end
