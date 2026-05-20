@@ -1,24 +1,19 @@
-# README
+# Staccato
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+**Staccato** is a web application that allows users to create map markers, share locations, and explore community-contributed places.
 
-Things you may want to cover:
+Built with:
 
-* Ruby version
+- Ruby on Rails
+- React
+- Inertia.js
+- TailwindCSS
+- Mapbox GL JS
 
-* System dependencies
+## Features
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- Interactive map interface
+- Create and manage location pins
+- Address autocomplete with Mapbox Geocoding API
+- Marker popups with shared information
+- Modern React frontend powered by Inertia.js

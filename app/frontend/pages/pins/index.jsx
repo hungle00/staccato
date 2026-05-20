@@ -1,7 +1,7 @@
 import { Head, Link, usePage } from '@inertiajs/react'
 import { Fragment } from 'react'
 import Pin from './pin'
-import Map from './map'
+import Map from './maps/map'
 
 export default function Index({ pins }) {
   const { flash } = usePage()
@@ -88,7 +88,7 @@ export default function Index({ pins }) {
 
           {/* RIGHT MAP */}
           <div className="flex-1">
-            <Map />
+            <Map pins={pins} />
           </div>
         </div>
       </div>

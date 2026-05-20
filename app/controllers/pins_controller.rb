@@ -3,7 +3,7 @@ class PinsController < InertiaController
 
   # GET /pins
   def index
-    @pins = Pin.all
+    @pins = Pin.published.with_geocoded_coordinates
     render inertia: {
       pins: @pins.map do |pin|
         serialize_pin(pin)
@@ -72,7 +72,7 @@ class PinsController < InertiaController
 
     def serialize_pin(pin)
       pin.as_json(only: [
-        :id, :name, :location, :description, :published
+        :id, :name, :location, :description, :published, :latitude, :longitude
       ])
     end
 end
